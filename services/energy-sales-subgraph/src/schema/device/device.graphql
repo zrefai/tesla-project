@@ -1,0 +1,28 @@
+extend type Query {
+  devices(deviceType: DeviceType, pageArgs: PageArgs): DevicesConnection
+}
+
+type DevicesConnection {
+  edges: [DeviceEdge]!
+  pageInfo: PageInfo!
+}
+
+type DeviceEdge {
+  node: Device!
+  cursor: Cursor!
+}
+
+type Device @key(fields: "id") {
+  id: String!
+  name: String!
+  releaseDate: String
+  deviceType: DeviceType!
+  cost: Cost!
+  dimensions: Dimensions!
+  energyMeasurement: EnergyMeasurement!
+}
+
+enum DeviceType {
+  STORAGE
+  TRANSFORMER
+}
