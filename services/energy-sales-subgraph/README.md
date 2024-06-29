@@ -4,6 +4,12 @@ CRUD GQL subgraph for energy sales.
 
 # Getting started
 
+## Environment variables
+
+Copy the contents `.env.sample` to `.env`
+
+If any variables from `.env.sample` do not have valid values, request variable values from author
+
 ## Building the subgraph
 
 To build the subgraph, we can use:
