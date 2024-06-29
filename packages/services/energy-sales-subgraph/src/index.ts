@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import dbClient from '@config/db-client';
 import startApolloServer from '@config/apollo-server';
-import { verifyEnvVariables } from '@libraries/utils';
+import { verifyEnvVariables } from '../../../libraries/utils/dist';
 
 dotenv.config();
 
