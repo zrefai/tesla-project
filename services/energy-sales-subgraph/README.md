@@ -14,7 +14,7 @@ If any variables from `.env.sample` do not have valid values, request variable v
 
 To build the subgraph, we can use:
 
-```
+```bash
 npm run build
 ```
 
@@ -24,12 +24,12 @@ This will run graphql-codegen and build all of the typescript files
 
 You can run from the build using:
 
-```
+```bash
 npm run start
 ```
 
 Or run in dev mode using:
 
-```
+```bash
 npm run dev
 ```
