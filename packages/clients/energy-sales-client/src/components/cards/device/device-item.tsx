@@ -25,6 +25,7 @@ export const DeviceItem = ({ device }: DeviceItemProps) => {
   });
 
   useEffect(() => {
+    // When transformer count in context changes, we need to update the transformer device item here
     if (
       context &&
       isDeviceTransformer &&
