@@ -102,7 +102,7 @@ export type PageInfo = {
 
 export type Query = {
   __typename?: 'Query';
-  devices?: Maybe<DevicesConnection>;
+  devices: DevicesConnection;
 };
 
 
@@ -303,7 +303,7 @@ export interface PositiveIntScalarConfig extends GraphQLScalarTypeConfig<Resolve
 }
 
 export type QueryResolvers<ContextType = DataSourceContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  devices?: Resolver<Maybe<ResolversTypes['DevicesConnection']>, ParentType, ContextType, Partial<QueryDevicesArgs>>;
+  devices?: Resolver<ResolversTypes['DevicesConnection'], ParentType, ContextType, Partial<QueryDevicesArgs>>;
 }>;
 
 export type Resolvers<ContextType = DataSourceContext> = ResolversObject<{

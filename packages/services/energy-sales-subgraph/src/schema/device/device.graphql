@@ -1,5 +1,5 @@
 extend type Query {
-  devices(deviceType: DeviceType, pageArgs: PageArgs): DevicesConnection
+  devices(deviceType: DeviceType, pageArgs: PageArgs): DevicesConnection!
 }
 
 type DevicesConnection {
