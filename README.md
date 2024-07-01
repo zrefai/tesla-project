@@ -15,7 +15,7 @@ Values for specific environment variables should be in the submission email.
 
 ## Installing dependencies
 
-Next step is to build the project. Run the command below:
+Next step is to build from the root of this project. Run the command below:
 
 ```bash
 npm install
@@ -29,7 +29,9 @@ The final step is to run the project. Run the command below:
 npm run build:dev
 ```
 
-For any further runs after building, you can run:
+The client and subgraph servers should start in parallel under `http://localhost:8000` and `http://localhost:4001/` respectively.
+
+If no changes have been made to the project after the last time you ran the build command, you can run:
 
 ```bash
 npm run dev
