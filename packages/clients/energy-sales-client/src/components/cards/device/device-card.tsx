@@ -5,7 +5,7 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-} from '../../ui/card';
+} from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -16,13 +16,13 @@ import {
 } from '@/components/ui/table';
 import { Skeleton } from '@/components/ui/skeleton';
 import { DeviceItem } from './device-item';
-import { GET_DEVICES } from '../../../queries/get-devices.query';
+import { GET_DEVICES } from '@/queries/get-devices.query';
 
 export const DeviceCard = () => {
   const { loading, data } = useQuery(GET_DEVICES);
 
   return (
-    <Card className="flex flex-col gap-2">
+    <Card className="flex flex-col h-fit gap-2">
       <CardHeader className="pb-0">
         <CardTitle>Available Devices</CardTitle>
         <CardDescription className="w-[600px]">

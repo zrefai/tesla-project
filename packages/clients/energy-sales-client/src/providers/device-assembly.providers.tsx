@@ -3,21 +3,20 @@ import { GET_TRANSFORMER_DEVICES } from '@/queries/get-transformer-devices.query
 import { useQuery } from '@apollo/client';
 import { createContext, useState } from 'react';
 
-export type DeviceConfigurationContextType = {
+export type AssemblyContextType = {
   devices: Device[];
   storageDevicesCount: number;
   transformerDevicesCount: number;
-  addToDeviceConfiguration: (device: Device) => void;
-  removeFromDeviceConfiguration: (deviceId: string) => void;
+  addToDeviceAssembly: (device: Device) => void;
+  removeFromDeviceAssembly: (deviceId: string) => void;
 };
 
-export const DeviceConfigurationContext =
-  createContext<DeviceConfigurationContextType | null>(null);
+export const AssemblyContext = createContext<AssemblyContextType | null>(null);
 
-const DeviceConfigurationProvider: React.FC<{
+const AssemblyProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [deviceConfiguration, setDeviceConfiguration] = useState<Device[]>([]);
+  const [deviceAssembly, setDeviceAssembly] = useState<Device[]>([]);
   const [storageDevicesCount, setStorageDevicesCount] = useState(0);
   const [transformerDevicesCount, setTransformerDevicesCount] = useState(0);
 
@@ -25,8 +24,8 @@ const DeviceConfigurationProvider: React.FC<{
   // Since only 1 transformer exists in data set, we can grab the first one
   const transformerDevice = data?.devices.edges[0]?.node as Device;
 
-  const addToDeviceConfiguration = (device: Device) => {
-    const updatedConfiguration = [...deviceConfiguration, device];
+  const addToDeviceAssembly = (device: Device) => {
+    const updatedAssembly = [...deviceAssembly, device];
 
     if (device.deviceType === 'STORAGE') {
       // Add a transformer for every 4 storage devices in the current configuration
@@ -37,7 +36,7 @@ const DeviceConfigurationProvider: React.FC<{
           updatedTransformerDeviceCount < leastNumberOfTransformersRequired
         ) {
           updatedTransformerDeviceCount += 1;
-          updatedConfiguration.push(transformerDevice);
+          updatedAssembly.push(transformerDevice);
         }
         setTransformerDevicesCount(updatedTransformerDeviceCount);
       }
@@ -46,11 +45,11 @@ const DeviceConfigurationProvider: React.FC<{
       setTransformerDevicesCount(transformerDevicesCount + 1);
     }
 
-    setDeviceConfiguration(updatedConfiguration);
+    setDeviceAssembly(updatedAssembly);
   };
 
-  const removeFromDeviceConfiguration = (deviceId: string) => {
-    const updatedConfiguration = [...deviceConfiguration];
+  const removeFromDeviceAssembly = (deviceId: string) => {
+    const updatedConfiguration = [...deviceAssembly];
     let n = updatedConfiguration.length;
 
     // Find index of last device with matching device ID
@@ -67,22 +66,22 @@ const DeviceConfigurationProvider: React.FC<{
     }
 
     updatedConfiguration.splice(n, 1);
-    setDeviceConfiguration(updatedConfiguration);
+    setDeviceAssembly(updatedConfiguration);
   };
 
   return (
-    <DeviceConfigurationContext.Provider
+    <AssemblyContext.Provider
       value={{
-        devices: deviceConfiguration ?? [],
+        devices: deviceAssembly ?? [],
         storageDevicesCount,
         transformerDevicesCount,
-        addToDeviceConfiguration,
-        removeFromDeviceConfiguration,
+        addToDeviceAssembly,
+        removeFromDeviceAssembly,
       }}
     >
       {children}
-    </DeviceConfigurationContext.Provider>
+    </AssemblyContext.Provider>
   );
 };
 
-export default DeviceConfigurationProvider;
+export default AssemblyProvider;

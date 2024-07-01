@@ -13,11 +13,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { DeviceConfigurationContext } from '@/providers/device-configuration.providers';
+import { AssemblyContext } from '@/providers/device-assembly.providers';
 import { useContext, useMemo } from 'react';
 
 export const TotalAssemblyCard = () => {
-  const context = useContext(DeviceConfigurationContext);
+  const context = useContext(AssemblyContext);
 
   const costFormatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -33,31 +33,29 @@ export const TotalAssemblyCard = () => {
       };
     }
 
-    let grid = [];
-    let gridI = 0;
+    const rowLengths = [];
+    let rowI = 0;
     let totalEnergy = 0;
     let totalCost = 0;
 
-    for (let i = 0; i < context?.devices?.length; i++) {
-      const device = context.devices[i];
-
-      if (grid.length == 0) {
-        grid.push(0);
+    for (const device of context.devices) {
+      if (rowLengths.length == 0) {
+        rowLengths.push(0);
       }
-      if (grid[gridI] + device.dimensions.width <= 100) {
-        grid[gridI] += device.dimensions.width;
+      if (rowLengths[rowI] + device.dimensions.width <= 100) {
+        rowLengths[rowI] += device.dimensions.width;
       } else {
-        gridI += 1;
-        grid.push(0);
-        grid[gridI] += device.dimensions.width;
+        rowI += 1;
+        rowLengths.push(0);
+        rowLengths[rowI] += device.dimensions.width;
       }
 
       totalCost += device.cost.amount;
       totalEnergy += device.energyMeasurement.value;
     }
 
-    const length = grid.length ? grid.length * 10 : 0;
-    const width = grid.length ? Math.max(...grid) : 0;
+    const length = rowLengths.length ? rowLengths.length * 10 : 0;
+    const width = rowLengths.length ? Math.max(...rowLengths) : 0;
 
     return {
       totalDimensions: `${width}FTx${length}FT`,
@@ -67,7 +65,7 @@ export const TotalAssemblyCard = () => {
   }, [context]);
 
   return (
-    <Card className="flex flex-col gap-2">
+    <Card className="flex flex-col w-full gap-2">
       <CardHeader className="pb-0">
         <CardTitle>Total Assembly</CardTitle>
         <CardDescription>

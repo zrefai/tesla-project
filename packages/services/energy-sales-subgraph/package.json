@@ -2,7 +2,7 @@
   "name": "energy-sales-subgraph",
   "author": "Zaki Refai",
   "license": "ISC",
-  "description": "CRUD GQL subgraph for energy sales.",
+  "description": "GQL subgraph for energy sales.",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

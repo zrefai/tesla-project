@@ -1,6 +1,6 @@
 # Energy Sales Subgraph
 
-CRUD GQL subgraph for energy sales.
+GQL subgraph for energy sales.
 
 # Getting started
 

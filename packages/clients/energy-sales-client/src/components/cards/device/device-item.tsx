@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { TableRow, TableCell } from '@/components/ui/table';
-import { DeviceConfigurationContext } from '@/providers/device-configuration.providers';
+import { AssemblyContext } from '@/providers/device-assembly.providers';
 import { Device } from '@/__generated__/graphql';
 
 interface DeviceItemProps {
@@ -9,7 +9,7 @@ interface DeviceItemProps {
 }
 
 export const DeviceItem = ({ device }: DeviceItemProps) => {
-  const context = useContext(DeviceConfigurationContext);
+  const context = useContext(AssemblyContext);
   const [count, setCount] = useState(0);
   const dimensions = `${device.dimensions.width}${device.dimensions.unit}x${device.dimensions.length}${device.dimensions.unit}`;
   const energyMeasurement = `${device.energyMeasurement.value}${device.energyMeasurement.unit}`;
@@ -38,7 +38,7 @@ export const DeviceItem = ({ device }: DeviceItemProps) => {
   const onAdd = () => {
     setCount(count + 1);
     if (context) {
-      context.addToDeviceConfiguration(device);
+      context.addToDeviceAssembly(device);
     }
   };
 
@@ -48,7 +48,7 @@ export const DeviceItem = ({ device }: DeviceItemProps) => {
         return;
       }
       setCount(count - 1);
-      context?.removeFromDeviceConfiguration(device.id);
+      context?.removeFromDeviceAssembly(device.id);
     }
   };
 

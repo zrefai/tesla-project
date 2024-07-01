@@ -2,7 +2,7 @@
 import '@/styles/global.css';
 import type { AppProps } from 'next/app';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import DeviceConfigurationProvider from '@/providers/device-configuration.providers';
+import AssemblyProvider from '@/providers/device-assembly.providers';
 
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_ENERGY_SALES_SUBGRAPH_URL,
@@ -13,9 +13,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <main>
       <ApolloProvider client={client}>
-        <DeviceConfigurationProvider>
+        <AssemblyProvider>
           <Component {...pageProps} />
-        </DeviceConfigurationProvider>
+        </AssemblyProvider>
       </ApolloProvider>
     </main>
   );
